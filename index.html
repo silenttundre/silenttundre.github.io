@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cupertino Stories: Through the Years</title>
+  
+  <!-- Meta tags and styles from cupertinostories.html -->
+  <meta name="description" content="Explore Cupertino's history through images and stories. From orchards to innovation, see how Cupertino has evolved over time.">
+  
+  <!-- CSS links from cupertinostories.html -->
+  <link rel='stylesheet' id='dashicons-css' href='https://cupertinostories.org/wp-includes/css/dashicons.min.css?ver=6.8' type='text/css' media='all' />
+  <link rel='stylesheet' id='admin-bar-css' href='https://cupertinostories.org/wp-includes/css/admin-bar.min.css?ver=6.8' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://cupertinostories.org/wp-includes/css/dist/block-library/style.min.css?ver=6.8' type='text/css' media='all' />
+  <link rel='stylesheet' id='hestia_style-css' href='https://cupertinostories.org/wp-content/themes/hestia/style.min.css?ver=3.2.7' type='text/css' media='all' />
+  <link rel='stylesheet' id='hestia_fonts-css' href='https://fonts.googleapis.com/css?family=Roboto%3A300%2C400%2C500%2C700%7CRoboto+Slab%3A400%2C700&#038;subset=latin%2Clatin-ext&#038;ver=3.2.7' type='text/css' media='all' />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Improved base styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    
+    /* Image cycling styles - now full width */
+    .image-cycle-section {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      padding-bottom: 20px; /* Add this line */
+    }
+    
+    .image-cycle-container {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+    
+    .cycle-image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+    
+    .cycle-image.active {
+      opacity: 1;
+    }
+    
+    .cycle-caption {
+      position: absolute;
+      bottom: 0; /* Changed from 100px to 0 */
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      font-size: 1.5rem;
+      z-index: 10;
+    }
+    
+    /* CRT TV Effects */
+    .crt-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, 
+        rgba(255, 0, 0, 0.06), 
+        rgba(0, 255, 0, 0.02), 
+        rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 4px 100%;
+      z-index: 4;
+      pointer-events: none;
+    }
+    
+    /* Improved header and navigation */
+    .header {
+      position: absolute;
+      width: 100%;
+      z-index: 100;
+    }
+    
+    .navbar {
+      background: rgba(0,0,0,0.5) !important;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      background: rgba(0,0,0,0.9) !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-nav > li > a {
+      color: white !important;
+      font-weight: 500;
+      padding: 15px 20px !important;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav > li > a:hover {
+      color: #e91e63 !important;
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .navbar-brand {
+      padding: 15px;
+    }
+    
+    /* Content spacing */
+    .main {
+      margin-top: 10vh;
+    }
+    
+    /* Audio controls styling */
+    .audio-controls {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+    }
+    
+    .audio-controls button {
+      background: #e91e63;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+    
+    /* Center alignment for title and subtitle */
+    .text-center {
+      text-align: center;
+    }
+
+    .hestia-title:after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: #e91e63;
+      bottom: -10px;
+      left: 25%;
+    }
+
+    .description {
+      color: #666;
+      font-weight: 300;
+      margin-bottom: 40px;
+      font-size: 1.2rem;
+    }
+
+    /* Redesigned About Section */
+    .hestia-about {
+      padding: 80px 0;
+      background: white;
+    }
+    
+    .hestia-title {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      position: relative;
+      display: inline-block;
+    }
+
+    .about-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 15px;
+      width: 300px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      color: #e91e63;
+      margin-bottom: 20px;
+    }
+    
+    .feature-card h3 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+    
+    .feature-card p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    .btn-primary {
+      background: #e91e63;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background: #c2185b;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(233,30,99,0.3);
+    }
+    
+    /* Stories Directory Section */
+    .stories-directory {
+      padding: 80px 0;
+      background: #f9f9f9;
+    }
+    
+    .directory-container {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      background: white;
+    }
+    
+    /* Left Pane - Story List */
+    .story-list {
+      width: 300px;
+      background: #2c3e50;
+      color: white;
+      padding: 30px 0;
+      height: 700px;
+      overflow-y: auto;
+    }
+    
+    .story-list-header {
+      padding: 0 25px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+    
+    .story-list-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .story-item {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+    
+    .story-item:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .story-item.active {
+      background: rgba(255,255,255,0.1);
+      border-left: 3px solid #e91e63;
+    }
+    
+    .story-item h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    
+    .story-item p {
+      margin: 5px 0 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    /* Right Pane - Story Content */
+    .story-content {
+      flex: 1;
+      padding: 40px;
+      height: 700px;
+      overflow-y: auto;
+    }
+    
+    .story-image {
+      width: 100%;
+      height: 350px;
+      object-fit: contain; /* Shows entire image within the container */
+      background-color: #f5f5f5; /* Adds a background color for any empty space */
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .story-title {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    
+    .story-text {
+      line-height: 1.8;
+      color: #555;
+      font-size: 1.1rem;
+    }
+    
+    /* Animation for content transition */
+    .story-content-inner {
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 992px) {
+      .directory-container {
+        flex-direction: column;
+      }
+      
+      .story-list {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+      }
+      
+      .story-content {
+        height: auto;
+      }
+      
+      .about-features {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .feature-card {
+        width: 80%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar-nav > li > a {
+        padding: 10px 15px !important;
+        font-size: 13px;
+      }
+      
+      .hestia-title {
+        font-size: 2rem;
+      }
+
+      .story-image {
+        height: 250px; /* Slightly smaller height on mobile */
+      }
+
+    }
+    /* Footer Styles */
+    .footer-black {
+      background: #000;
+      color: #fff;
+      padding: 40px 0 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .footer-about, .footer-contact {
+      flex: 1;
+      min-width: 300px;
+      padding: 0 15px;
+    }
+
+    .footer h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .footer p {
+      color: #aaa;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      color: #fff;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #e91e63;
+    }
+
+    .footer-divider {
+      border-color: #333;
+      margin: 20px 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+    }
+
+    .footer-nav a:hover {
+      color: #e91e63;
+    }
+
+    .footer-credit {
+      color: #aaa;
+    }
+
+    /* Icons - using dashicons classes */
+    .icon-facebook:before {
+      content: "\f304";
+      font-family: dashicons;
+    }
+    .icon-twitter:before {
+      content: "\f301";
+      font-family: dashicons;
+    }
+    .icon-google:before {
+      content: "\f462";
+      font-family: dashicons;
+    }
+
+    /* Responsive adjustments - keep this inside media query */
+    @media (max-width: 768px) {
+      .footer-top {
+        flex-direction: column;
+      }
+      
+      .footer-about, .footer-contact {
+        margin-bottom: 30px;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .footer-nav {
+        justify-content: center;
+      }
+    }
+    /* Updated Scroll Indicator Styles */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 50%;
+      right: 30px; /* Position from right edge */
+      transform: translateY(50%); /* Vertical centering */
+      z-index: 50;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      color: white;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+    }
+
+    .scroll-indicator i {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .scroll-indicator span {
+      display: none; /* Hide text on smaller space */
+    }
+
+    /* Adjust audio controls position to avoid overlap */
+    .audio-controls {
+      bottom: 20px;
+      right: 90px; /* Move left to accommodate arrow */
+    }
+
+    /* Update bounce animation for new position */
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(50%);}
+      40% {transform: translateY(30%);}
+      60% {transform: translateY(40%);}
+    }
+
+    /* Show text on hover */
+    .scroll-indicator:hover span {
+      display: block;
+      position: absolute;
+      right: 60px;
+      white-space: nowrap;
+      background: rgba(0,0,0,0.7);
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body class="home wp-singular page-template-default page page-id-322 logged-in admin-bar no-customize-support wp-theme-hestia blog-post header-layout-default">
+  <div id="wpadminbar" class="nojq nojs">
+    <!-- Admin bar content -->
+  </div>
+
+  <div class="wrapper">
+    <header class="header">
+      <nav class="navbar navbar-default navbar-color-on-scroll navbar-transparent hestia_left navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <div class="title-logo-wrapper">
+              <a class="navbar-brand" href="https://cupertinostories.org/" title="">
+                <p></p>
+              </a>
+            </div>
+          </div>
+          <div id="main-navigation" class="collapse navbar-collapse">
+            <ul id="menu-web-agency-gb-main-menu" class="nav navbar-nav">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-127">
+                <a title="Home" href="/">Home</a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-347">
+                <a title="Survey" href="new_survery.html">Survey</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Image Cycling Section -->
+    <section class="image-cycle-section">
+      <div class="image-cycle-container">
+        <!-- Images -->
+        <div class="cycle-image" id="cycle-image1" style="background-image: url('old_cupertino_0.jpg');"></div>
+        <div class="cycle-image" id="cycle-image2" style="background-image: url('old_cupertino_1.jpg');"></div>
+        <div class="cycle-image" id="cycle-image3" style="background-image: url('1961_cupertino.jpg');"></div>
+        <div class="cycle-image" id="cycle-image4" style="background-image: url('1973_cupertino.jpg');"></div>
+        <div class="cycle-image" id="cycle-image5" style="background-image: url('2017_apple_park.jpg');"></div>
+        <div class="cycle-image" id="cycle-image6" style="background-image: url('apple_park.jpeg');"></div>
+        
+        <!-- CRT Effects -->
+        <div class="crt-overlay"></div>
+        
+        <!-- Caption -->
+        <div class="cycle-caption">Cupertino: Through the Years</div>
+      </div>
+    </section>
+    <div class="scroll-indicator" id="scrollIndicator" title="Scroll for more">
+      <i class="dashicons dashicons-arrow-down-alt2"></i>
+      <span>Explore More</span>
+    </div>
+
+    <!-- Audio controls for narration -->
+    <div class="audio-controls">
+      <button id="playNarration">Play Narration</button>
+      <button id="pauseNarration">Pause</button>
+      <button id="stopNarration">Stop</button>
+    </div>
+
+    <!-- Main content from cupertinostories.html -->
+    <div class="main main-raised">
+      <section class="hestia-about" id="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+              <h2 class="hestia-title">About Cupertino Stories</h2>
+              <h5 class="description">Preserving our community's history through shared stories</h5>
+            </div>
+          </div>
+          
+          <div class="about-features">
+            <div class="feature-card">
+              <div class="feature-icon">📖</div>
+              <h3>What is Cupertino Stories</h3>
+              <p>Cupertino Stories is a digital effort allowing everyone to help create history by sharing their Cupertino stories online. This citywide effort is made possible by a collaboration across the Cupertino Library Foundation, Cupertino Historic Society, Cupertino Mayor Liang Chao, and local residents.</p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">👥</div>
+              <h3>Who can participate</h3>
+              <p>Anyone who has lived, worked, been involved, or done business in Cupertino is welcome to share their Cupertino story. We also welcome the perspectives of local organizations that serve our city.</p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">✍️</div>
+              <h3>How to participate</h3>
+              <p>Simply submit your story via this form at <a href="https://ee.kobotoolbox.org/x/atOy6KLQ">https://ee.kobotoolbox.org/x/atOy6KLQ</a>. Once it is reviewed for general relevance and appropriateness, it will be published on CupertinoStories.org.</p>
+            </div>
+          </div>
+          
+          <div class="text-center" style="margin-top: 50px;">
+            <a href="https://ee.kobotoolbox.org/x/atOy6KLQ" title="Share Your Story!" class="btn btn-primary" target="_blank">Add Your Story!</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stories Directory Section - Added at the bottom as requested -->
+      <section class="stories-directory">
+        <div class="directory-container">
+          <!-- Left Pane - Story List -->
+          <div class="story-list">
+            <div class="story-list-header">
+              <h2>Community Stories</h2>
+              <p>Select a story to read</p>
+            </div>
+            
+            <div class="story-item active" data-story="GeorgeChong">
+              <h3>George Chong</h3>
+              <p>Cupertino Little League President</p>
+            </div>
+            
+            <div class="story-item" data-story="BubbaBear">
+              <h3>Bubba Bear</h3>
+              <p>Local Icon on Bubb Road</p>
+            </div>
+            
+            <div class="story-item" data-story="LibraryHistory">
+              <h3>Library History</h3>
+              <p>Cupertino's Beloved Institution</p>
+            </div>
+            
+            <!-- Add more story items as needed -->
+          </div>
+          
+          <!-- Right Pane - Story Content -->
+          <div class="story-content">
+            <div class="story-content-inner">
+              <img src="Stories/GeorgeChong.jpg" alt="George Chong" class="story-image">
+              <h1 class="story-title">George Chong</h1>
+              <div class="story-text">
+                <p>The Cupertino Little League has been a community institution in this city since 1962. It relies on countless hours of volunteer time from residents like George Chong to bring the sport of baseball to hundreds of children and teens each year. Chong, the current Board President, originally became involved in the Little League because he was so grateful to the other parents who coached selflessly for his own son.</p>
+                
+                <p>Now, Chong oversees all of the league's many teams, including T-Ball, Minor, Majors, Juniors and Seniors Leagues, and a Challengers division for those who are physically and mentally challenged. The league is an all-volunteer army with many families volunteering to coach, organize fundraising, and all the logistics needed for a season. Cupertino Little League continues to bring together local families and students each year, building a true community that supports one another.</p>
+                
+                <p>Under Chong's leadership, the league has expanded its outreach programs, ensuring children from all backgrounds can participate. "What I love most is seeing kids who never thought they could play baseball discover their potential," Chong says. "It's not just about the sport—it's about building confidence and community."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer footer-black">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-about">
+            <h3>About us</h3>
+            <p>Cupertino Stories is a digital effort allowing everyone to help create history by sharing more Cupertino stories online. This citywide effort is made possible by a collaboration across the Cupertino Library Foundation, Cupertino Historic Society, Cupertino Mayor Liang Chau, and local residents.</p>
+          </div>
+          
+          <div class="footer-contact">
+            <h3>Get in touch</h3>
+            <p>If you have any questions or feedback, contact us at cupertinoscience@gmail.com</p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"><i class="icon-facebook"></i></a>
+              <a href="#" aria-label="Twitter"><i class="icon-twitter"></i></a>
+              <a href="#" aria-label="Google"><i class="icon-google"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <hr class="footer-divider">
+        
+        <div class="footer-bottom">
+          <div class="footer-nav">
+            <a href="/">HOME</a>
+            <a href="new_survery.html">SURVEY</a>
+          </div>
+          <div class="footer-credit">
+            Hestia | Developed by ThemeIsle
+          </div>
+        </div>
+      </div>
+    </footer>
+</div>
+
+  <!-- Script links from cupertinostories.html -->
+  <script type="text/javascript" src="https://cupertinostories.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+  <script type="text/javascript" src="https://cupertinostories.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+  <script type="text/javascript" src="https://cupertinostories.org/wp-content/themes/hestia/assets/bootstrap/js/bootstrap.min.js?ver=1.0.2" id="jquery-bootstrap-js"></script>
+  <script type="text/javascript" src="https://cupertinostories.org/wp-content/themes/hestia/assets/js/script.min.js?ver=3.2.7" id="hestia_scripts-js"></script>
+  
+  <!-- Audio element for background music -->
+  <audio id="welcomeMusic" preload="auto">
+    <source src="Echoes_Through_Time.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Image cycling setup
+      const images = [
+        { element: document.getElementById('cycle-image1'), caption: "Early Cupertino (1)" },
+        { element: document.getElementById('cycle-image2'), caption: "Early Cupertino (2)" },
+        { element: document.getElementById('cycle-image3'), caption: "Cupertino in 1961" },
+        { element: document.getElementById('cycle-image4'), caption: "Cupertino in 1973" },
+        { element: document.getElementById('cycle-image5'), caption: "Apple Park in 2017" },
+        { element: document.getElementById('cycle-image6'), caption: "Modern Apple Park" }
+      ];
+      
+      const captionElement = document.querySelector('.cycle-caption');
+      let currentIndex = 0;
+      
+      // Initialize first image
+      images[currentIndex].element.classList.add('active');
+      captionElement.textContent = images[currentIndex].caption;
+      
+      // Cycle through images
+      function cycleImages() {
+        images[currentIndex].element.classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        
+        setTimeout(() => {
+          images[currentIndex].element.classList.add('active');
+          captionElement.textContent = images[currentIndex].caption;
+        }, 2000);
+      }
+      
+      // Start cycling every 8 seconds
+      const imageInterval = setInterval(cycleImages, 8000);
+      
+      // Make navbar change on scroll
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          document.querySelector('.navbar').classList.add('scrolled');
+        } else {
+          document.querySelector('.navbar').classList.remove('scrolled');
+        }
+      });
+      
+      // Narration functionality
+      const playBtn = document.getElementById('playNarration');
+      const pauseBtn = document.getElementById('pauseNarration');
+      const stopBtn = document.getElementById('stopNarration');
+      const music = document.getElementById('welcomeMusic');
+      
+      const message = `Welcome to Cupertino Stories! 
+      Step into a living timeline of Cupertino, where past and present blend through the voices of the community. 
+      From orchards to innovation, this digital space invites you to explore, reflect, and share your own piece of history. 
+      Together, we're preserving the heart of Cupertino—one story at a time!`;
+      
+      let speech = null;
+      
+      function playTvSound() {
+        const tvSound = new Audio();
+        tvSound.src = "data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU...";
+        tvSound.volume = 0.3;
+        tvSound.play().catch(e => console.log("TV sound error:", e));
+      }
+      
+      function startNarration() {
+        if (speechSynthesis.speaking && speechSynthesis.paused) {
+          speechSynthesis.resume();
+          return;
+        }
+        
+        // Cancel any ongoing speech
+        speechSynthesis.cancel();
+        
+        speech = new SpeechSynthesisUtterance(message);
+        speech.pitch = 1.6;
+        speech.rate = 1.2;
+        speech.volume = 1.2;
+        
+        // Find the best available voice
+        const voices = speechSynthesis.getVoices();
+        const preferredVoices = [
+          'Samantha', 'Karen', 'Ava', 'Allison', 'Susan', 'Serena',
+          'Veena', 'Tessa', 'Fiona', 'Moira', 'Melina', 'Google UK English Female'
+        ];
+        
+        const enthusiasticVoice = voices.find(voice => 
+          preferredVoices.some(name => voice.name.includes(name)) && 
+          voice.lang.includes('en')
+        ) || voices.find(voice => voice.lang.includes('en'));
+        
+        if (enthusiasticVoice) {
+          speech.voice = enthusiasticVoice;
+        }
+        
+        speech.onend = () => {
+          music.volume = 0.6;
+          music.play().catch(e => console.log("Music play failed:", e));
+        };
+        
+        speechSynthesis.speak(speech);
+        playTvSound();
+      }
+      
+      function pauseNarration() {
+        if (speechSynthesis.speaking) {
+          speechSynthesis.pause();
+        }
+      }
+      
+      function stopNarration() {
+        speechSynthesis.cancel();
+        music.pause();
+        music.currentTime = 0;
+      }
+      
+      // Button event listeners
+      playBtn.addEventListener('click', startNarration);
+      pauseBtn.addEventListener('click', pauseNarration);
+      stopBtn.addEventListener('click', stopNarration);
+      
+      // Initialize voices when they become available
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = function() {
+          console.log("Voices loaded");
+        };
+      }
+      
+      // Story Directory Functionality
+      const storyItems = document.querySelectorAll('.story-item');
+      const storyContent = document.querySelector('.story-content');
+      
+      // Sample data - in a real implementation, you'd fetch this from your directory
+      const stories = {
+        'GeorgeChong': {
+          title: 'George Chong',
+          image: 'Stories/GeorgeChong.jpg',
+          content: `
+            <p>The Cupertino Little League has been a community institution in this city since 1962. It relies on countless hours of volunteer time from residents like George Chong to bring the sport of baseball to hundreds of children and teens each year. Chong, the current Board President, originally became involved in the Little League because he was so grateful to the other parents who coached selflessly for his own son.</p>
+            
+            <p>Now, Chong oversees all of the league's many teams, including T-Ball, Minor, Majors, Juniors and Seniors Leagues, and a Challengers division for those who are physically and mentally challenged. The league is an all-volunteer army with many families volunteering to coach, organize fundraising, and all the logistics needed for a season. Cupertino Little League continues to bring together local families and students each year, building a true community that supports one another.</p>
+            
+            <p>Under Chong's leadership, the league has expanded its outreach programs, ensuring children from all backgrounds can participate. "What I love most is seeing kids who never thought they could play baseball discover their potential," Chong says. "It's not just about the sport—it's about building confidence and community."</p>
+          `
+        },
+        'BubbaBear': {
+          title: 'Bubba the Bubb Road Bear',
+          image: 'Stories/BubbaTheBubbRoadBear.jpeg',
+          content: `
+            <p>Bubba the Bubb Road Bear was born on October 11th, 2015. It was originally an old pine tree that had died due to the drought. But the tree's owner, Sarah Kopy, didn't want to remove the stump because the sidewalk in that area is uneven, and posed a potential hazard for pedestrians.</p>
+            
+            <p>So, Ms. Sarah came up with an idea: Why not carve a bear from the stump? She hired a tree carver from Humboldt named Glenn Severson, even paying for him to stay at the Cupertino Motel for two days to complete the carving. She wanted a "happy bear" carved because everyone loves bears.</p>
+          `
+        },
+        'LibraryHistory': {
+          title: 'Cupertino Library',
+          image: 'Stories/CupertinoLibrary.jpg',
+          content: `
+            <p>The Cupertino Library is the busiest library in Santa Clara County. It has the highest number of patrons and has long served as a central gathering place for both kids and adults in Cupertino. However, it wasn't always in the beautiful, majestic building we see today—it had humbler beginnings.</p>
+            
+            <p>The first Cupertino Library was housed in the Cupertino Store at the northeast corner of Stevens Creek Road and De Anza Boulevard. On December 8th, 1960, the library then moved to its current location, originally the Allario Shopping Center. At that time, patrons would enter at the top and go down to the children's section.</p>
+          `
+        }
+      };
+      
+      // Handle story selection
+      storyItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const storyId = this.getAttribute('data-story');
+          const story = stories[storyId];
+          
+          // Update active state
+          storyItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Update content with animation
+          storyContent.innerHTML = `
+            <div class="story-content-inner">
+              <img src="${story.image}" alt="${story.title}" class="story-image">
+              <h1 class="story-title">${story.title}</h1>
+              <div class="story-text">
+                ${story.content}
+              </div>
+            </div>
+          `;
+        });
+      });
+      
+      // Start everything after page loads
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          // Start with the narration automatically if desired
+          // startNarration();
+        }, 500);
+      });
+    });
+    // Add to your existing script
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    scrollIndicator.addEventListener('click', () => {
+      document.querySelector('#about').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>
