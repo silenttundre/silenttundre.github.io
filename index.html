@@ -377,28 +377,76 @@
     
     /* Stories Directory Section */
     .stories-directory {
-      padding: 80px 0;
+      padding: 0;
       background: #f9f9f9;
+      height: 90vh; /* Almost full viewport height */
+      min-height: 700px;
+      display: flex;
+      align-items: center;
     }
-    
+
     .directory-container {
       display: flex;
-      max-width: 1200px;
-      margin: 0 auto;
+      width: 100%;
+      height: 100%;
+      margin: 0;
       box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-      border-radius: 10px;
+      border-radius: 0;
       overflow: hidden;
       background: white;
     }
-    
+
     /* Left Pane - Story List */
     .story-list {
       width: 300px;
       background: #2c3e50;
       color: white;
       padding: 30px 0;
-      height: 700px;
+      height: 100%;
       overflow-y: auto;
+    }
+
+    /* Story Content Section */
+    .story-content {
+      flex: 1;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .story-content-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 40px;
+      overflow-y: auto;
+      box-sizing: border-box;
+      transform: translateY(100%); /* Start off screen */
+      opacity: 0;
+      transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    
+    .story-content-inner.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .story-content-inner.exiting {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+
+    .story-text {
+      line-height: 1.8;
+      color: #555;
+      font-size: 1.1rem;
+      max-width: 100%;
+      word-wrap: break-word;
+      padding-right: 20px; /* Add right padding */
+      box-sizing: border-box;
     }
     
     .story-list-header {
@@ -440,22 +488,22 @@
       font-size: 0.9rem;
       opacity: 0.8;
     }
-    
-    /* Right Pane - Story Content */
-    .story-content {
-      flex: 1;
-      padding: 40px;
-      height: 700px;
-      overflow-y: auto;
+      
+    /* Story Image - maintains original aspect ratio */
+    .story-image-container {
+      width: calc(100% - 80px); /* Account for padding */
+      margin: 0 auto;
+      padding: 20px 0 0 0;
+      display: flex;
+      justify-content: center;
+      background-color: #f5f5f5;
     }
     
     .story-image {
-      width: 100%;
-      height: 350px;
-      object-fit: contain; /* Shows entire image within the container */
-      background-color: #f5f5f5; /* Adds a background color for any empty space */
+      max-width: 100%;
+      max-height: 50vh;
+      object-fit: contain;
       border-radius: 8px;
-      margin-bottom: 30px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
     
@@ -464,17 +512,9 @@
       margin-bottom: 20px;
       font-size: 2rem;
       font-weight: 700;
-    }
-    
-    .story-text {
-      line-height: 1.8;
-      color: #555;
-      font-size: 1.1rem;
-    }
-    
-    /* Animation for content transition */
-    .story-content-inner {
-      animation: fadeIn 0.5s ease-out;
+      word-break: break-word; /* Prevent title overflow */
+      padding-right: 20px;
+      box-sizing: border-box;
     }
     
     @keyframes fadeIn {
@@ -502,45 +542,30 @@
     
     /* Responsive design */
     @media (max-width: 992px) {
-      .directory-container {
-        flex-direction: column;
+      .story-content-inner {
+        padding: 20px;
       }
       
-      .story-list {
-        width: 100%;
-        height: auto;
-        max-height: 300px;
+      .story-image-container {
+        width: calc(100% - 40px); /* Adjust for smaller padding */
       }
       
-      .story-content {
-        height: auto;
-      }
-      
-      .about-features {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .feature-card {
-        width: 80%;
+      .story-text {
+        padding-right: 10px;
       }
     }
     
     @media (max-width: 768px) {
-      .navbar-nav > li > a {
-        padding: 10px 15px !important;
-        font-size: 13px;
+      .story-content-inner {
+        padding: 15px;
       }
       
-      .hestia-title {
-        font-size: 2rem;
+      .story-image-container {
+        width: calc(100% - 30px);
+        padding-top: 10px;
       }
-
-      .story-image {
-        height: 250px; /* Slightly smaller height on mobile */
-      }
-
     }
+
     /* Footer Styles */
     .footer-black {
       background: #000;
@@ -846,8 +871,10 @@
           
           <!-- Right Pane - Story Content -->
           <div class="story-content">
-            <div class="story-content-inner">
-              <img src="Stories/GeorgeChong.jpg" alt="George Chong" class="story-image">
+            <div class="story-content-inner active">
+              <div class="story-image-container">
+                <img src="Stories/GeorgeChong.jpg" alt="George Chong" class="story-image">
+              </div>
               <h1 class="story-title">George Chong</h1>
               <div class="story-text">
                 <p>The Cupertino Little League has been a community institution in this city since 1962. It relies on countless hours of volunteer time from residents like George Chong to bring the sport of baseball to hundreds of children and teens each year. Chong, the current Board President, originally became involved in the Little League because he was so grateful to the other parents who coached selflessly for his own son.</p>
@@ -920,6 +947,11 @@
         { element: document.getElementById('cycle-image6'), caption: "Modern Apple Park" }
       ];
       
+      const firstStory = document.querySelector('.story-item.active');
+      if (firstStory) {
+        firstStory.click();
+      }
+
       const captionElement = document.querySelector('.cycle-caption');
       let currentIndex = 0;
       
@@ -1076,37 +1108,56 @@
           const storyId = this.getAttribute('data-story');
           const story = stories[storyId];
           
+          if (this.classList.contains('active')) return;
+          
           // Update active state
           storyItems.forEach(i => i.classList.remove('active'));
           this.classList.add('active');
           
-          // Update content with animation
-          storyContent.innerHTML = `
-            <div class="story-content-inner">
+          // Create new content element
+          const newContent = document.createElement('div');
+          newContent.className = 'story-content-inner';
+          newContent.innerHTML = `
+            <div class="story-image-container">
               <img src="${story.image}" alt="${story.title}" class="story-image">
-              <h1 class="story-title">${story.title}</h1>
-              <div class="story-text">
-                ${story.content}
-              </div>
+            </div>
+            <h1 class="story-title">${story.title}</h1>
+            <div class="story-text">
+              ${story.content}
             </div>
           `;
+          
+          const contentContainer = document.querySelector('.story-content');
+          const currentContent = contentContainer.querySelector('.story-content-inner.active');
+          
+          // Add new content
+          contentContainer.appendChild(newContent);
+          
+          // Trigger reflow to enable transition
+          void newContent.offsetWidth;
+          
+          // Start animation
+          if (currentContent) {
+            currentContent.classList.remove('active');
+            currentContent.classList.add('exiting');
+          }
+          
+          newContent.classList.add('active');
+          
+          // Remove old content after animation
+          setTimeout(() => {
+            if (currentContent) {
+              currentContent.remove();
+            }
+          }, 500);
+          
+          // Scroll to top of new content
+          setTimeout(() => {
+            newContent.scrollTop = 0;
+          }, 50);
         });
       });
-      
-      // Start everything after page loads
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          // Start with the narration automatically if desired
-          // startNarration();
-        }, 500);
-      });
-    });
-    // Add to your existing script
-    const scrollIndicator = document.getElementById('scrollIndicator');
-    scrollIndicator.addEventListener('click', () => {
-      document.querySelector('#about').scrollIntoView({
-        behavior: 'smooth'
-      });
+
     });
   </script>
 </body>
