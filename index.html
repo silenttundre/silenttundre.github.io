@@ -108,55 +108,126 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     
-    /* Add this to your existing CSS */
+    /* Centered Title Styles */
+    .navbar-brand-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
     .navbar-nav {
       list-style: none;
       padding-left: 0;
-      margin: 0;
       display: flex;
     }
-
+    
     .navbar-nav > li {
       position: relative;
     }
-
-    .navbar-nav > li > a {
-      position: relative;
-      padding: 15px 20px !important;
-      text-decoration: none !important;
-    }
-
-    /* Optional: Add a subtle hover effect */
-    .navbar-nav > li > a:after {
-      content: '';
-      position: absolute;
-      bottom: 10px;
-      left: 20px;
-      width: calc(100% - 40px);
-      height: 2px;
-      background: #e91e63;
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .navbar-nav > li > a:hover:after {
-      transform: scaleX(1);
+    
+    .navbar-nav > li:not(:last-child) {
+      margin-right: 20px; /* Space between items */
     }
     
-    /* Alternative with subtle separators */
+    .navbar-nav > li > a {
+      color: white !important;
+      font-weight: 500;
+      padding: 15px 0 !important; /* Adjusted padding */
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      text-decoration: none !important;
+      display: block;
+      position: relative;
+    }
+    
+    /* Optional: Add hover effect */
+    .navbar-nav > li > a:hover {
+      color: #e91e63 !important;
+    }
+    
+    /* Optional: Add subtle separator */
     .navbar-nav > li:not(:last-child):after {
       content: '';
       position: absolute;
-      right: 0;
+      right: -10px;
       top: 50%;
       transform: translateY(-50%);
       height: 15px;
       width: 1px;
       background: rgba(255,255,255,0.3);
     }
+
+    .site-title {
+      color: white !important;
+      font-family: 'Special Elite', 'Rockwell', serif;
+      font-size: 2.8rem; /* Increased from 2rem */
+      font-weight: 700;
+      margin: 0;
+      padding: 15px 0;
+      letter-spacing: 2px; /* Increased from 1px */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Added for better visibility */
+      transition: all 0.3s ease;
+    }
     
-    .navbar-brand {
-      padding: 15px;
+    /* Add this to your existing font imports */
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+    /* Navigation Container */
+    .navbar-default .container {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      min-height: 50px; /* Match your navbar height */
+    }
+
+    /* Right-aligned Menu */
+    #main-navigation {
+      display: flex;
+    }
+
+    .navbar-nav {
+      display: flex;
+      margin: 0;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .navbar-brand-center {
+        position: static;
+        transform: none;
+        width: 100%;
+        order: 1;
+      }
+      
+      .navbar-default .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      #main-navigation {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .site-title {
+        font-size: 1.8rem;
+        padding: 10px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-title {
+        font-size: 1.5rem;
+      }
+      
+      .navbar-nav > li > a {
+        padding: 10px 15px !important;
+        font-size: 0.9rem;
+      }
     }
     
     /* Content spacing */
@@ -630,15 +701,16 @@
     <header class="header">
       <nav class="navbar navbar-default navbar-color-on-scroll navbar-transparent hestia_left navbar-fixed-top">
         <div class="container">
-          <div class="navbar-header">
-            <div class="title-logo-wrapper">
-              <a class="navbar-brand" href="https://cupertinostories.org/" title="">
-                <p></p>
-              </a>
-            </div>
+          <!-- Centered Brand Title -->
+          <div class="navbar-brand-center">
+            <a class="navbar-brand" href="https://cupertinostories.org/" title="Cupertino Stories">
+              <h1 class="site-title">Cupertino Stories</h1>
+            </a>
           </div>
+          
+          <!-- Right-aligned Navigation -->
           <div id="main-navigation" class="collapse navbar-collapse">
-            <ul id="menu-web-agency-gb-main-menu" class="nav navbar-nav">
+            <ul id="menu-web-agency-gb-main-menu" class="nav navbar-nav navbar-right">
               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-127">
                 <a title="Home" href="/">Home</a>
               </li>
