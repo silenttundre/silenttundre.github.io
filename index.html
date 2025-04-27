@@ -739,6 +739,11 @@
       padding: 5px 10px;
       border-radius: 4px;
     }
+
+    .stories-directory {
+      padding-top: 80px; /* Add padding to account for fixed navbar */
+      margin-top: 0; /* Remove any existing margin */
+    }
   </style>
 </head>
 
@@ -1063,6 +1068,27 @@
         speechSynthesis.onvoiceschanged = function() {
           console.log("Voices loaded");
         };
+      }
+
+      // Scroll indicator functionality
+      const scrollIndicator = document.getElementById('scrollIndicator');
+      if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+          // Get the stories directory section
+          const storiesSection = document.querySelector('.stories-directory');
+          
+          if (storiesSection) {
+            // Calculate the position to scroll to
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const scrollPosition = storiesSection.offsetTop - navbarHeight;
+            
+            // Smooth scroll to the stories section
+            window.scrollTo({
+              top: scrollPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
       }
       
       // Story Directory Functionality
