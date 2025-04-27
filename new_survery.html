@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Cupertino Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            position: relative;
+            min-height: 100vh;
+            background-color: #000; /* Fallback color */
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('old_cupertino_0.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: sepia(40%) brightness(0.9) blur(2px);
+            z-index: -2;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* soft light overlay */
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        .survey-form {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+            transition: background 0.3s ease;
+        }
+        
+        .form-group:last-of-type {
+            border-bottom: none;
+        }
+        
+        .form-group:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 10px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+            outline: none;
+        }
+
+        .upload-section {
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #d8e1ec;
+        }
+
+        .upload-section h4 {
+            margin-bottom: 5px;
+            color: #1a1a1a;
+        }
+
+        .preview-area {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .preview-item {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #007aff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #005fcc;
+        }
+
+        .alert {
+            display: none;
+            margin-top: 20px;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background-color: #e6f7ec;
+            border: 1px solid #b7e3c8;
+            color: #276738;
+        }
+
+        .alert-danger {
+            background-color: #fdecea;
+            border: 1px solid #f5c6cb;
+            color: #9f3a38;
+        }
+
+        input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+            accent-color: #007aff;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-banner {
+            background-color: #000;
+            color: white;
+            text-align: center;
+            padding: 14px 0;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+    </style>
+</head>
+<body>
+<header class="top-banner">
+    <div class="banner-text">Cupertino Stories Survey</div>
+    <a href="Test1.html" class="home-link">Home</a> <!-- Added Home link here -->
+</header>
+    
+<div class="container">
+    
+    <form id="cupertinoSurveyForm" class="survey-form" enctype="multipart/form-data">
+        <h2>Share Your Cupertino Story</h2>
+
+        <div class="form-group">
+            <label for="name">Your Name*</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address*</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="story">Your Cupertino Story*</label>
+            <textarea id="story" name="story" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Your Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Optional but helpful">
+        </div>
+        
+        <div class="form-group">
+            <label for="personOrOrg">Name of Person and/or Organization this story is about</label>
+            <input type="text" id="personOrOrg" name="personOrOrg" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Category of Story</label>
+            <div style="margin-top: 10px;">
+                <label><input type="radio" name="category" value="Education/Public Schools" required> Education/Public Schools</label><br>
+                <label><input type="radio" name="category" value="Community"> Community</label><br>
+                <label><input type="radio" name="category" value="Environment"> Environment</label><br>
+                <label><input type="radio" name="category" value="Government"> Government</label><br>
+                <label><input type="radio" name="category" value="Business"> Business</label><br>
+                <label><input type="radio" name="category" value="Public Safety"> Public Safety</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="storyDetail">What is this person/organization's story?</label>
+            <textarea id="storyDetail" name="storyDetail" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="whyCupertino">Why did this person choose to live in Cupertino? (If born here, state "born here")</label>
+            <textarea id="whyCupertino" name="whyCupertino" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="year">In what year or timeframe did this story occur?</label>
+            <input type="text" id="year" name="year" placeholder="e.g. 1998, early 2000s" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">How would you describe this person/organization?</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        
+        <div class="upload-section">
+            <h4>Upload Photos (Optional)</h4>
+            <p>JPG, PNG, GIF — Max 5MB each</p>
+            <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/gif" multiple>
+            <div id="photo-preview" class="preview-area"></div>
+        </div>
+
+        <div class="upload-section">
+            <h4>Upload Videos (Optional)</h4>
+            <p>MP4, MOV, AVI — Max 20MB each</p>
+            <input type="file" id="videos" name="videos[]" accept="video/mp4,video/quicktime,video/x-msvideo" multiple>
+            <div id="video-preview" class="preview-area"></div>
+        </div>
+
+        <div class="upload-section">
+            <h4>Upload Documents (Optional)</h4>
+            <p>PDF, DOC, DOCX, TXT — Max 10MB each</p>
+            <input type="file" id="documents" name="documents[]" accept=".pdf,.doc,.docx,.txt" multiple>
+            <div id="document-preview" class="preview-area"></div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-primary">Submit Your Story</button>
+        </div>
+
+        <div id="form-message" class="alert"></div>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('cupertinoSurveyForm');
+    const photoInput = document.getElementById('photos');
+    const videoInput = document.getElementById('videos');
+    const documentInput = document.getElementById('documents');
+    const messageDiv = document.getElementById('form-message');
+
+    const photoPreview = document.getElementById('photo-preview');
+    const videoPreview = document.getElementById('video-preview');
+    const documentPreview = document.getElementById('document-preview');
+
+    const MAX_PHOTO_SIZE = 5 * 1024 * 1024;
+    const MAX_VIDEO_SIZE = 20 * 1024 * 1024;
+    const MAX_DOC_SIZE = 10 * 1024 * 1024;
+
+    function handleFilePreview(input, previewArea, type, maxSize) {
+        previewArea.innerHTML = '';
+        Array.from(input.files).forEach((file, index) => {
+            if (file.size > maxSize) {
+                showMessage(`${file.name} exceeds the allowed size.`, 'danger');
+                return;
+            }
+
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+
+            if (type === 'photo' && file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                previewItem.appendChild(img);
+            } else {
+                const icon = document.createElement('div');
+                icon.textContent = file.name;
+                icon.style.padding = '10px';
+                icon.style.textAlign = 'center';
+                icon.style.fontSize = '12px';
+                previewItem.appendChild(icon);
+            }
+
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-btn';
+            removeBtn.innerHTML = '&times;';
+            removeBtn.onclick = function (e) {
+                e.preventDefault();
+                previewItem.remove();
+                const newFiles = Array.from(input.files).filter((_, i) => i !== index);
+                const dataTransfer = new DataTransfer();
+                newFiles.forEach(f => dataTransfer.items.add(f));
+                input.files = dataTransfer.files;
+            };
+
+            previewItem.appendChild(removeBtn);
+            previewArea.appendChild(previewItem);
+        });
+    }
+
+    function showMessage(message, type) {
+        messageDiv.textContent = message;
+        messageDiv.className = `alert alert-${type}`;
+        messageDiv.style.display = 'block';
+        setTimeout(() => { messageDiv.style.display = 'none'; }, 5000);
+    }
+
+    photoInput.addEventListener('change', () => handleFilePreview(photoInput, photoPreview, 'photo', MAX_PHOTO_SIZE));
+    videoInput.addEventListener('change', () => handleFilePreview(videoInput, videoPreview, 'video', MAX_VIDEO_SIZE));
+    documentInput.addEventListener('change', () => handleFilePreview(documentInput, documentPreview, 'document', MAX_DOC_SIZE));
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        showMessage("Thank you! Your story has been submitted.", 'success');
+        form.reset();
+        photoPreview.innerHTML = '';
+        videoPreview.innerHTML = '';
+        documentPreview.innerHTML = '';
+    });
+});
+</script>
+
+</body>
+</html>
