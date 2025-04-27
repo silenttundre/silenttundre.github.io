@@ -230,6 +230,31 @@
       }
     }
     
+    .site-tagline {
+      color: #f8f8f8;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      margin-top: -10px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Make sure it stays visible on scrolled navbar */
+    .navbar.scrolled .site-tagline {
+      color: #f8f8f8;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .site-tagline {
+        font-size: 0.8rem;
+        margin-top: -8px;
+      }
+    }
+
     /* Content spacing */
     .main {
       margin-top: 10vh;
@@ -705,6 +730,7 @@
           <div class="navbar-brand-center">
             <a class="navbar-brand" href="https://cupertinostories.org/" title="Cupertino Stories">
               <h1 class="site-title">Cupertino Stories</h1>
+              <div class="site-tagline">Preserving, Sharing, Celebrating</div>
             </a>
           </div>
           
